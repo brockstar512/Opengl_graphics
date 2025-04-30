@@ -22,6 +22,15 @@ bool Screen::Initialize()
 
 	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+	
+	/*
+		Core Profile (Modern OpenGL):
+		Must use VAOs, VBOs, and GLSL shaders.
+		Can’t use glBegin/glEnd, matrix stacks, or immediate mode rendering.
+		Compatibility Profile (Legacy + Modern):
+		You can use both glBegin/glEnd and shaders.
+		Useful for legacy applications or educational purposes.
+	*/
 
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
