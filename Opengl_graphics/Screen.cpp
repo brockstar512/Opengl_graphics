@@ -18,12 +18,14 @@ bool Screen::Initialize()
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);//1 indicates true, this means when rendering to the screen this will use two fram buffers... one that is displayed on the screen another that is rendered behind the scene
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	//1 indicates true, this means when rendering to the screen this will use two fram buffers... one that is displayed on the screen another that is rendered behind the scene
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
 	
 	/*
+	* 	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+
 		Core Profile (Modern OpenGL):
 		Must use VAOs, VBOs, and GLSL shaders.
 		Can’t use glBegin/glEnd, matrix stacks, or immediate mode rendering.
