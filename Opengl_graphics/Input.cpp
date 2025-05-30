@@ -43,6 +43,7 @@ void Input::Update()
             break;
 
         case SDL_EVENT_KEY_UP:
+            m_isKeyPressed = false;
             m_keyUp = events.key.key;
             break;
 

@@ -184,3 +184,17 @@ bool Shader::SendUniformData(const std::string& uniformName, GLfloat x, GLfloat 
 	glUniform3f(ID, x,y,z);
 	return true;
 }
+
+bool Shader::SendUniformData(const std::string& uniformName, const glm::mat4& data)
+{
+	GLint ID = glGetUniformLocation(m_shaderProgramID, uniformName.c_str());
+	if (ID == -1)
+	{
+		std::cout << "Shader variable" << uniformName << " not used or found." << std::endl;
+		return false;
+	}
+	glUniformMatrix4fv(ID, 1, GL_FALSE, &data[0][0]);
+
+	return true;
+
+}

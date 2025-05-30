@@ -2,6 +2,7 @@
 
 #include <string>
 #include "glad.h"
+#include <glm.hpp>
 
 
 
@@ -27,6 +28,8 @@ public:
 	bool SendUniformData(const std::string& uniformName, GLfloat data);
 	bool SendUniformData(const std::string& uniformName, GLfloat x, GLfloat y);
 	bool SendUniformData(const std::string& uniformName, GLfloat x, GLfloat y, GLfloat z);
+	bool SendUniformData(const std::string& uniformName, const glm::mat4& data);
+
 
 
 

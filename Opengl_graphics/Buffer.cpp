@@ -11,6 +11,7 @@ Buffer::Buffer()
 
 void Buffer::CreateBuffer(GLuint totalVertices)
 {
+	// 1) create the buffer
 	glGenBuffers(1, &m_vertexVBO);
 	glGenBuffers(1, &m_colorVBO);
 	glGenVertexArrays(1, &m_VAO);
@@ -22,14 +23,16 @@ void Buffer::FillVBO(VBOType vboType, GLfloat* data, GLsizeiptr bufferSize, Fill
 {
 	glBindVertexArray(m_VAO);
 	if (vboType == VERTEXT_BUFFER) {
-
+		//2) bind the buffer so we can used it
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexVBO);
 	}
 	else
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_colorVBO);
 	}
+	//3) give it the data
 	glBufferData(GL_ARRAY_BUFFER, bufferSize, data, fillType);
+	//4) we are not using it anymore
 	glBindVertexArray(0);
 
 }
@@ -42,9 +45,13 @@ void Buffer::LinkBuffer(const std::string& attribute, VBOType vboType, Component
 {
 	GLuint shaderProgramId = Shader::Instance()->GetShaderProgramID();
 
+	//get the id of the attribute variable in the shader so we can write to it
 	GLint Id = glGetAttribLocation(shaderProgramId, attribute.c_str());
-	glBindVertexArray(m_VAO);
+	
+	//Binds the VAO that’s part of the Buffer class. All buffer / attribute state set next will be stored in this VAO.	
+	glBindVertexArray(m_VAO); 
 
+	//choose which buffer to bind to
 	if (vboType == VERTEXT_BUFFER) {
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexVBO);
@@ -53,7 +60,9 @@ void Buffer::LinkBuffer(const std::string& attribute, VBOType vboType, Component
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_colorVBO);
 	}
+	//Describes how to interpret the buffer's data for the shader attribute:
 	glVertexAttribPointer(Id, componentType, GL_FLOAT, GL_FALSE, 0, nullptr);
+	//Enables this attribute for use in rendering.
 	glEnableVertexAttribArray(Id);
 	glBindVertexArray(0);
 
@@ -72,3 +81,5 @@ void Buffer::DestroyBuffer()
 	glDeleteBuffers(1, &m_colorVBO);
 	glDeleteVertexArrays(1, &m_VAO);
 }
+
+
