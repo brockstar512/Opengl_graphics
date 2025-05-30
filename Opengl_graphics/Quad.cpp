@@ -5,7 +5,7 @@
 
 Quad::Quad()
 {
-	float vertices[] = {
+	GLfloat vertices[] = {
 		// Position       
 		-0.5f, 0.5f, 0.0f,
 		 0.5f, 0.5f, 0.0f,
@@ -15,25 +15,47 @@ Quad::Quad()
 		0.5f,  0.5f, 0.0f,
 		0.5f,  -0.5f, 0.0f,
 	};
-	float colors[] = {
+	//GLfloat rainbocolors[] = {
 
-		 1.0f, 0.0f, 0.0f,
-		 0.0f, 0.0f, 1.0f,
-		 0.0f, 1.0f, 1.0f,
+	//	 1.0f, 0.0f, 0.0f,
+	//	 0.0f, 0.0f, 1.0f,
+	//	 0.0f, 1.0f, 1.0f,
 
-		 0.0f, 1.0f, 1.0f ,
-		 0.0f, 0.0f, 1.0f,
-		 0.0f, 1.0f, 0.0f,
+	//	 0.0f, 1.0f, 1.0f ,
+	//	 0.0f, 0.0f, 1.0f,
+	//	 0.0f, 1.0f, 0.0f,
+	//};
+	GLfloat colors[] = {
+
+			 1.0f, 1.0f, 1.0f,
+			 1.0f, 1.0f, 1.0f,
+			 1.0f, 1.0f, 1.0f,
+
+			 1.0f, 1.0f, 1.0f ,
+			 1.0f, 1.0f, 1.0f,
+			 1.0f, 1.0f, 1.0f,
+		};
+
+	GLfloat UVs[] = {
+		0.0f,1.0f,
+		1.0f,1.0f,
+		0.0f,0.0f,
+
+		0.0f,0.0f,
+		1.0f,1.0f,
+		1.0f,0.0f
 	};
 
 	m_buffer.CreateBuffer(6);
 	m_buffer.FillVBO(Buffer::VERTEXT_BUFFER, vertices, sizeof(vertices), Buffer::SINGLE);
 	m_buffer.FillVBO(Buffer::COLOR_BUFFER, colors, sizeof(colors), Buffer::SINGLE);
+	m_buffer.FillVBO(Buffer::TEXTURE_BUFFER, UVs, sizeof(UVs), Buffer::SINGLE);
+
 	m_buffer.LinkBuffer("vertexIn", Buffer::VERTEXT_BUFFER, Buffer::XYZ, Buffer::FLOAT);
 	m_buffer.LinkBuffer("colorIn", Buffer::COLOR_BUFFER, Buffer::RGB, Buffer::FLOAT);
+	m_buffer.LinkBuffer("textureIn", Buffer::TEXTURE_BUFFER, Buffer::UV, Buffer::FLOAT);
 
-
-
+	m_texture.Load("Textures/crate.png");
 	m_position = glm::vec3(0.0f);
 
 }
@@ -47,7 +69,10 @@ Quad::~Quad()
 void Quad::Render()
 {
 	Shader::Instance()->SendUniformData("model", m_model);
+	m_texture.Bind();
 	m_buffer.Render(Buffer::TRIANGLES);
+	m_texture.Unbind();
+
 }
 
 void Quad::Update()
