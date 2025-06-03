@@ -24,7 +24,7 @@ void Buffer::CreateBuffer(GLuint totalVertices)
 void Buffer::FillVBO(VBOType vboType, GLfloat* data, GLsizeiptr bufferSize, FillType fillType)
 {
 	glBindVertexArray(m_VAO);
-	if (vboType == VERTEXT_BUFFER) {
+	if (vboType == VERTEX_BUFFER) {
 		//2) bind the buffer so we can used it
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexVBO);
 	}
@@ -59,7 +59,7 @@ void Buffer::LinkBuffer(const std::string& attribute, VBOType vboType, Component
 	glBindVertexArray(m_VAO); 
 
 	//choose which buffer to bind to
-	if (vboType == VERTEXT_BUFFER) {
+	if (vboType == VERTEX_BUFFER) {
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexVBO);
 	}
