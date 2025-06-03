@@ -6,7 +6,7 @@
 #include "Quad.h"
 #include <glm.hpp>
 #include "Camera.h"
-
+#include "Light.h"
 bool isAppRunning = true;
 
 
@@ -36,6 +36,7 @@ int main(int argc, char* argv[])
 
 	Quad quad;
 	Camera camera;
+	Light light;
 	camera.Set3DView();
 
 	while (isAppRunning)
@@ -46,6 +47,11 @@ int main(int argc, char* argv[])
 		char keyPressed = Input::Instance()->GetKeyDown();
 	
 		camera.Update();
+
+
+		light.Update();
+		light.Render();
+		light.SendToShader();
 
 		//update/render
 		quad.Update();

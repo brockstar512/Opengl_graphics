@@ -15,16 +15,7 @@ Quad::Quad()
 		0.5f,  0.5f, 0.0f,
 		0.5f,  -0.5f, 0.0f,
 	};
-	//GLfloat rainbocolors[] = {
 
-	//	 1.0f, 0.0f, 0.0f,
-	//	 0.0f, 0.0f, 1.0f,
-	//	 0.0f, 1.0f, 1.0f,
-
-	//	 0.0f, 1.0f, 1.0f ,
-	//	 0.0f, 0.0f, 1.0f,
-	//	 0.0f, 1.0f, 0.0f,
-	//};
 	GLfloat colors[] = {
 
 			 1.0f, 1.0f, 1.0f,
@@ -69,9 +60,17 @@ Quad::~Quad()
 void Quad::Render()
 {
 	Shader::Instance()->SendUniformData("model", m_model);
-	m_texture.Bind();
+	Shader::Instance()->SendUniformData("isLit", true);
+	Shader::Instance()->SendUniformData("isTextured", false);
+
+	Shader::Instance()->SendUniformData("material.shininess", m_shininess);
+	Shader::Instance()->SendUniformData("material.ambient", m_ambient.r, m_ambient.g, m_ambient.b);
+	Shader::Instance()->SendUniformData("material.diffuse", m_diffuse.r, m_diffuse.g, m_diffuse.b);
+	Shader::Instance()->SendUniformData("material.specular", m_specular.r, m_specular.g, m_specular.b);
+
+	//m_texture.Bind();
 	m_buffer.Render(Buffer::TRIANGLES);
-	m_texture.Unbind();
+	//m_texture.Unbind();
 
 }
 
@@ -111,4 +110,5 @@ void Quad::Update()
 	}
 	m_model = glm::mat4(1.0f);
 	m_model = glm::translate(m_model, m_position);
+	//m_model = glm::rotate(m_model, glm::radians(90.0f), glm::vec3(1.0f,0.0f,0.0f));
 }
