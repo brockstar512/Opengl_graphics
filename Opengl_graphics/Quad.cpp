@@ -56,7 +56,7 @@ Quad::Quad()
 	m_buffer.LinkBuffer("textureIn", Buffer::TEXTURE_BUFFER, Buffer::UV, Buffer::FLOAT);
 
 	m_texture.Load("Textures/crate.png");
-	m_position = glm::vec3(0.0f);
+	m_position = glm::vec3(0.0f, 0.0f, -1.0f);
 
 }
 
