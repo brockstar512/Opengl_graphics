@@ -24,11 +24,11 @@ void Buffer::CreateBuffer(GLuint totalVertices)
 void Buffer::FillVBO(VBOType vboType, GLfloat* data, GLsizeiptr bufferSize, FillType fillType)
 {
 	glBindVertexArray(m_VAO);
-	if (vboType == VERTEX_BUFFER) {
+	if (vboType == VBOType::VERTEX_BUFFER) {
 		//2) bind the buffer so we can used it
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexVBO);
 	}
-	else if (vboType == COLOR_BUFFER)
+	else if (vboType == VBOType::COLOR_BUFFER)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_colorVBO);
 	}
@@ -38,7 +38,7 @@ void Buffer::FillVBO(VBOType vboType, GLfloat* data, GLsizeiptr bufferSize, Fill
 
 	}
 	//3) give it the data
-	glBufferData(GL_ARRAY_BUFFER, bufferSize, data, fillType);
+	glBufferData(GL_ARRAY_BUFFER, bufferSize, data, static_cast<GLenum>(fillType));
 	//4) we are not using it anymore
 	glBindVertexArray(0);
 
@@ -59,11 +59,11 @@ void Buffer::LinkBuffer(const std::string& attribute, VBOType vboType, Component
 	glBindVertexArray(m_VAO); 
 
 	//choose which buffer to bind to
-	if (vboType == VERTEX_BUFFER) {
+	if (vboType == VBOType::VERTEX_BUFFER) {
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexVBO);
 	}
-	else if (vboType == COLOR_BUFFER)
+	else if (vboType == VBOType::COLOR_BUFFER)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_colorVBO);
 
@@ -74,7 +74,7 @@ void Buffer::LinkBuffer(const std::string& attribute, VBOType vboType, Component
 
 	}
 	//Describes how to interpret the buffer's data for the shader attribute:
-	glVertexAttribPointer(Id, componentType, GL_FLOAT, GL_FALSE, 0, nullptr);
+	glVertexAttribPointer(Id, static_cast<GLint>(componentType), GL_FLOAT, GL_FALSE, 0, nullptr);
 	//Enables this attribute for use in rendering.
 	glEnableVertexAttribArray(Id);
 	glBindVertexArray(0);
@@ -84,7 +84,7 @@ void Buffer::LinkBuffer(const std::string& attribute, VBOType vboType, Component
 void Buffer::Render(DrawType drawType)
 {
 	glBindVertexArray(m_VAO);
-	glDrawArrays(drawType, 0, m_totalVertices);
+	glDrawArrays(static_cast<GLenum>(drawType), 0, m_totalVertices);
 	glBindVertexArray(0);
 }
 

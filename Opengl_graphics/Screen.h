@@ -1,3 +1,4 @@
+#pragma once
 #include <SDL3/SDL.h>// i tried using #include <SDL.h>, but it would not work have SLD3 in the properties vc++ lib path bc all the other header files have inclide SDL3/*** already in them so it was breaking it.
 class Screen {
 public:
