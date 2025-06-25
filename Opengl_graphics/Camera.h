@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm.hpp>
-#include "glad.h"
+#include "gl.h"
 class Camera
 {
 public:

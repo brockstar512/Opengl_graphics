@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Screen.h"
 #include "Input.h"
-#include "glad.h"
+#include "gl.h"
 #include "Shader.h"
 #include "Quad.h"
 #include <glm.hpp>

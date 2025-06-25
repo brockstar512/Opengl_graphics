@@ -1,5 +1,5 @@
 #pragma once
-#include "glad.h"
+#include "gl.h"
 #include <string>
 class Buffer
 {

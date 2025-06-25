@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Screen.h"
-#include "glad.h"
+#include "gl.h"
 bool Screen::Initialize()
 {
 	if (!SDL_Init(
@@ -59,7 +59,7 @@ bool Screen::Initialize()
 
 	}
 
-	if (!gladLoadGL())
+	if (!gladLoaderLoadGL())
 	{
 		std::cout << "Error loading glad extensions" << std::endl;
 	}

@@ -1,5 +1,5 @@
 #pragma once
-#include "glad.h"
+#include "gl.h"
 #include "Buffer.h"
 #include <glm.hpp>
 #include "Texture.h"
